@@ -1,0 +1,6 @@
+# Core MCP server SDK (FastMCP lives here)
+mcp>=1.2.0
+
+# Postgres driver — only needed when DATABASE_URL is set.
+# The demo runs on bundled SQLite with zero extra setup, so this is optional.
+psycopg[binary]>=3.1; python_version >= "3.8"

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trinity — AI Agents &amp; MCP Integration | Dmitrii Vasilev</title>
+  <meta name="description" content="I connect your data and tools to Claude, Cursor and Windsurf with production-grade MCP servers and AI agents. From RTL to silicon — shipped by an FPGA &amp; ML systems engineer." />
+  <meta property="og:title" content="Trinity — AI Agents &amp; MCP Integration" />
+  <meta property="og:description" content="Production-grade MCP servers and AI agents wired into your stack in days, not quarters." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav__inner">
+      <a class="brand" href="#top">
+        <span class="brand__mark">φ</span>
+        <span class="brand__name">Trinity</span>
+      </a>
+      <nav class="nav__links">
+        <a href="#services">Services</a>
+        <a href="#proof">Work</a>
+        <a href="#how">Process</a>
+        <a href="#pricing">Pricing</a>
+        <a class="btn btn--ghost btn--sm" href="#audit">Free audit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero__inner">
+        <p class="eyebrow">FPGA · ML Systems · AI Agents — from RTL to silicon</p>
+        <h1>Wire your data and tools into<br /><span class="grad">Claude, Cursor &amp; Windsurf</span></h1>
+        <p class="lede">
+          I build production-grade <strong>MCP servers</strong> and <strong>AI agents</strong> that give the models your team
+          already uses safe, audited access to your databases, APIs and internal tools — shipped in days, not quarters.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#audit">Get a free AI-Agent Readiness Audit</a>
+          <a class="btn btn--ghost" href="#proof">See shipped work</a>
+        </div>
+        <ul class="hero__trust">
+          <li><b>10+ yrs</b> shipping software · FPGA→silicon</li>
+          <li><b>Rust · Python · TypeScript · Verilog</b></li>
+          <li>Remote · async · Thailand (UTC+7)</li>
+        </ul>
+      </div>
+      <div class="hero__glow" aria-hidden="true"></div>
+    </section>
+
+    <!-- PROBLEM / VALUE -->
+    <section class="band">
+      <div class="wrap grid grid--3">
+        <div class="card">
+          <h3>The model can't see your data</h3>
+          <p>ChatGPT and Claude are brilliant but blind to your Postgres, your API, your docs. MCP is the standard that fixes that — done right, once.</p>
+        </div>
+        <div class="card">
+          <h3>Off-the-shelf wrappers leak</h3>
+          <p>Most "AI integrations" are brittle prompt glue with no auth, no audit trail, no tests. I ship typed, permissioned, version-controlled servers.</p>
+        </div>
+        <div class="card">
+          <h3>You don't have months</h3>
+          <p>A scoped MCP server is a 1–2 week engagement. You get a working tool your whole team can call from the editor or chat they already pay for.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="wrap">
+        <h2 class="section__title">What I build</h2>
+        <p class="section__sub">Three ways to put agents to work on your stack.</p>
+        <div class="grid grid--3">
+          <article class="svc">
+            <div class="svc__num">01</div>
+            <h3>MCP Server Build</h3>
+            <p>One data source or tool — Postgres, REST API, internal service, file store — exposed to Claude / Cursor / Windsurf as a clean, auth'd MCP server with tests and deploy.</p>
+            <ul class="ticks">
+              <li>Typed tools + input validation</li>
+              <li>Read/write permissioning &amp; audit log</li>
+              <li>Docker / Railway deploy + docs</li>
+            </ul>
+          </article>
+          <article class="svc svc--feature">
+            <div class="svc__num">02</div>
+            <h3>Agent Integration</h3>
+            <p>A multi-tool agent over your data: RAG across your knowledge base + actions against your systems, with guardrails, eval harness and a usage dashboard.</p>
+            <ul class="ticks">
+              <li>RAG over Postgres / your docs</li>
+              <li>Multi-tool orchestration + guardrails</li>
+              <li>Eval suite so it doesn't drift</li>
+            </ul>
+          </article>
+          <article class="svc">
+            <div class="svc__num">03</div>
+            <h3>Fractional AI Engineer</h3>
+            <p>Ongoing retainer: I own your agent/MCP layer — new tools, edge-AI inference, FPGA/accelerator work — as a senior engineer embedded in your team part-time.</p>
+            <ul class="ticks">
+              <li>Priority build + maintenance</li>
+              <li>Edge / on-device inference (BitNet)</li>
+              <li>Async, your stack, your repo</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF -->
+    <section id="proof" class="section section--alt">
+      <div class="wrap">
+        <h2 class="section__title">Shipped, in the open</h2>
+        <p class="section__sub">Real MCP servers, agents and silicon — public on GitHub, not slideware.</p>
+        <div class="grid grid--3">
+          <a class="repo" href="https://github.com/gHashTag/trios" target="_blank" rel="noopener">
+            <span class="repo__lang">Zig</span>
+            <h4>trios</h4>
+            <p>Trinity Git Orchestrator — an MCP server that lets AI agents drive real git workflows.</p>
+          </a>
+          <a class="repo" href="https://github.com/gHashTag/trios-mcp-rag" target="_blank" rel="noopener">
+            <span class="repo__lang">Rust</span>
+            <h4>trios-mcp-rag</h4>
+            <p>Production MCP server: RAG over PostgreSQL with five agent tools (search, fetch, audit, build).</p>
+          </a>
+          <a class="repo" href="https://github.com/gHashTag/BrowserOS" target="_blank" rel="noopener">
+            <span class="repo__lang">TypeScript</span>
+            <h4>BrowserOS</h4>
+            <p>Open-source agentic browser — agents that actually operate the web.</p>
+          </a>
+          <a class="repo" href="https://github.com/gHashTag/trinity" target="_blank" rel="noopener">
+            <span class="repo__lang">Zig</span>
+            <h4>trinity</h4>
+            <p>Ternary / BitNet edge LLM inference — autoregressive generation on sub-$30 hardware.</p>
+          </a>
+          <a class="repo" href="https://github.com/gHashTag/tt-trinity-gf16" target="_blank" rel="noopener">
+            <span class="repo__lang">Verilog</span>
+            <h4>tt-trinity-gf16</h4>
+            <p>Dot-product accelerator taped out on TinyTapeout — yes, actual silicon.</p>
+          </a>
+          <a class="repo repo--more" href="https://github.com/gHashTag" target="_blank" rel="noopener">
+            <h4>150+ public repos →</h4>
+            <p>RTL, ML systems, agents and infra. Browse the full body of work.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="how" class="section">
+      <div class="wrap">
+        <h2 class="section__title">How it works</h2>
+        <div class="steps">
+          <div class="step"><span>1</span><h4>Free audit</h4><p>A 30-min call + written readiness report: what to connect first, the fastest win, fixed quote.</p></div>
+          <div class="step"><span>2</span><h4>Scoped build</h4><p>Fixed-price, fixed-scope. You see a working server on a demo dataset within the first week.</p></div>
+          <div class="step"><span>3</span><h4>Wire to your stack</h4><p>Connected to your real data with auth, tests and audit logging. Your team calls it from day one.</p></div>
+          <div class="step"><span>4</span><h4>Handoff or retain</h4><p>Full docs and source, or keep me on retainer to extend it. No lock-in either way.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section section--alt">
+      <div class="wrap">
+        <h2 class="section__title">Straightforward pricing</h2>
+        <p class="section__sub">Fixed scope, fixed price. No surprises.</p>
+        <div class="grid grid--3 pricing">
+          <div class="price">
+            <h3>MCP Server Build</h3>
+            <div class="price__tag">from <b>$3,500</b></div>
+            <p class="price__meta">1–2 weeks · one source/tool</p>
+            <a class="btn btn--ghost btn--block" href="#audit">Start with an audit</a>
+          </div>
+          <div class="price price--feature">
+            <div class="price__badge">Most popular</div>
+            <h3>Agent Integration</h3>
+            <div class="price__tag">from <b>$6,500</b></div>
+            <p class="price__meta">2–4 weeks · RAG + multi-tool agent</p>
+            <a class="btn btn--primary btn--block" href="#audit">Start with an audit</a>
+          </div>
+          <div class="price">
+            <h3>Fractional AI Eng.</h3>
+            <div class="price__tag"><b>$4k–8k</b>/mo</div>
+            <p class="price__meta">retainer · ongoing ownership</p>
+            <a class="btn btn--ghost btn--block" href="#audit">Enquire</a>
+          </div>
+        </div>
+        <p class="fineprint">Just <b>2–3 builds a month</b> covers a senior full-time income. Retainers compound it.</p>
+      </div>
+    </section>
+
+    <!-- LEAD FORM -->
+    <section id="audit" class="section">
+      <div class="wrap form-wrap">
+        <div class="form-copy">
+          <h2 class="section__title">Free AI-Agent Readiness Audit</h2>
+          <p>Tell me what you'd want an agent to do. You'll get a short written report — the highest-leverage thing to connect first, the risks, and a fixed quote. No pitch, no obligation.</p>
+          <ul class="ticks ticks--lg">
+            <li>Concrete first use-case to ship</li>
+            <li>Data &amp; security gotchas flagged up front</li>
+            <li>Fixed-price quote within 48h</li>
+          </ul>
+        </div>
+        <form id="leadForm" class="lead" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="company">Company / project</label>
+            <input id="company" name="company" type="text" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <label for="usecase">What do you want the agent to do?</label>
+            <textarea id="usecase" name="usecase" rows="4" placeholder="e.g. let support search our Postgres orders + docs from Slack" required></textarea>
+          </div>
+          <button class="btn btn--primary btn--block" type="submit">Request my free audit</button>
+          <p class="lead__note" id="formNote">No spam. Replies usually within one business day.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div>
+        <span class="brand"><span class="brand__mark">φ</span><span class="brand__name">Trinity</span></span>
+        <p class="footer__tag">AI Agents &amp; MCP Integration — Dmitrii Vasilev</p>
+      </div>
+      <div class="footer__links">
+        <a href="https://github.com/gHashTag" target="_blank" rel="noopener">GitHub</a>
+        <a href="#services">Services</a>
+        <a href="#audit">Free audit</a>
+      </div>
+    </div>
+    <p class="footer__fine">φ² + 1/φ² = 3 · Built from RTL to silicon.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

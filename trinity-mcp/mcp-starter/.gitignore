@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+trinity_demo.db
+mcp_audit.jsonl
