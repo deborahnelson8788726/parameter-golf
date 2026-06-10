@@ -1,0 +1,11 @@
+.git
+data
+records
+train_gpt.py
+train_gpt_mlx.py
+requirements.txt
+agentic-os/brain
+trinity-mcp/mcp-starter
+*.md
+!agentic-os/dashboard/**
+!trinity-mcp/site/**
