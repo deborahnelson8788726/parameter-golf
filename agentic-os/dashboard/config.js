@@ -39,8 +39,8 @@ window.AOS_CONFIG = {
   modules: [
     { id: "rag",     name: "trios-mcp-rag",   kind: "MCP-сервер", status: "running",
       repo: "https://github.com/gHashTag/trios-mcp-rag", desc: "RAG over Postgres, 5 агент-инструментов" },
-    { id: "site",    name: "Trinity Site",    kind: "Лендинг",    status: "draft",
-      repo: "../../trinity-mcp/site/index.html",            desc: "Продающий сайт MCP-услуг + захват лидов" },
+    { id: "site",    name: "Trinity Site",    kind: "Лендинг",    status: "running",
+      repo: "trinity/",            desc: "Продающий сайт MCP-услуг + захват лидов" },
     { id: "browser", name: "BrowserOS",       kind: "Агент",      status: "running",
       repo: "https://github.com/gHashTag/BrowserOS", desc: "Агентный браузер" },
     { id: "edge",    name: "trinity (edge)",  kind: "Инференс",   status: "idle",
