@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+# Assembles the static site (Agentic OS dashboard at /, Trinity landing at
+# /trinity/) and publishes it to GitHub Pages. configure-pages with
+# enablement:true activates Pages automatically — no manual settings needed.
+
+on:
+  push:
+    branches:
+      - claude/niche-website-10k-revenue-1HO4j
+      - main
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site/trinity
+          cp -r agentic-os/dashboard/* _site/
+          cp -r trinity-mcp/site/* _site/trinity/
+          touch _site/.nojekyll
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
