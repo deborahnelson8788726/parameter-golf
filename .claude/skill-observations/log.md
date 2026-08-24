@@ -39,3 +39,18 @@ resolved statuses always carry their resolution date
 **Suggested improvement:** Before executing any install or vendoring step sourced from a summary, blog post, or video, list the actual artifact — repository tree, package contents — and reconcile it against the instructions. Verify three things specifically: the real directory layout, the complete bundle manifest (a skill or package is often more than its entry file), and the full set of operating modes, since a summary that omits one mode can invert the recommendation. Record what was verified against the primary source and what was carried over unverified.
 
 **Principle:** Secondhand install instructions are a hypothesis about a repository's layout, not a description of it. Verify structural claims against the artifact before executing them, and track which claims were verified — an unmarked mix of checked and unchecked assertions degrades into all-unchecked over time.
+
+### Observation 3: Aggregated comparisons listed a service that had been retired for three weeks
+
+**Status:** OPEN
+**Date:** 2026-08-20
+**Session context:** Surveying free LLM API tiers available to the project, using published comparison articles as the starting point.
+**Skill:** New skill candidate: vendoring-third-party-components
+**Type:** open-source
+**Phase/Area:** Verification of volatile facts
+
+**Issue:** Every comparison source consulted — including a provider blog post and several 2026-dated roundups — listed GitHub Models as an available free tier with specific rate limits. The service had been fully retired on 2026-07-30, three weeks before the session. A live probe of both documented endpoints returned 410 Gone, which is what surfaced the retirement; the discrepancy was then confirmed against the vendor's own changelog. Had the survey been written from the articles alone, it would have recommended a dead service with confident-looking numbers attached.
+
+**Suggested improvement:** For facts with a short half-life — service availability, pricing, rate limits, model catalogs — treat aggregated summaries as a candidate list to probe, never as the answer. Probe each candidate directly (an unauthenticated request distinguishes reachable-but-unauthenticated from gone), and confirm anything anomalous against the vendor's own changelog or status page before reporting. Separate probe-verified claims from summary-sourced ones in the output so the reader knows which numbers carry which confidence. Note also that a provider's own comparison of competitors is not a neutral source.
+
+**Principle:** Aggregated summaries decay silently: they are written once and keep asserting the same facts long after those facts expire, with no signal that anything changed. A cheap direct probe of the primary source is worth more than agreement among several secondhand sources, because those sources are correlated — they copy each other, so consensus among them is not independent confirmation.
