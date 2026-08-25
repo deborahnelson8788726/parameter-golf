@@ -8,7 +8,7 @@ was made. Versions are what npm served that day.
 
 | Server | Package | Status |
 |---|---|---|
-| `context7` | `@upstash/context7-mcp` v4.0.3 | Needs a free API key — see below |
+| `context7` | hosted `https://mcp.context7.com/mcp` | Verified working; needs a free API key |
 | `sequential-thinking` | `@modelcontextprotocol/server-sequential-thinking` v2026.7.4 | Works, no key |
 | `playwright` | `@playwright/mcp` v0.0.79 | Starts, but **inert in remote sessions** — see below |
 
@@ -16,20 +16,31 @@ was made. Versions are what npm served that day.
 
 Exposes `resolve-library-id` and `query-docs`. This is the one that closes a real gap: the
 model's training data has a cutoff, and Context7 fetches current documentation for a library
-at query time.
+at query time. Verified end to end — a `query-docs` call for PyTorch returned 5.8 KB of
+current documentation in 2.6 s.
 
-**A key is required in practice.** The server runs without one, but anonymous requests are
-pooled per egress IP, and a shared container IP means the monthly anonymous quota is normally
-already spent. Verified: the API answers `HTTP 200` with the body
-`{"error":"Quota Exceeded","message":"Monthly quota exceeded..."}`, and the MCP server hangs
-on that response rather than reporting it — so the failure looks like a timeout, not a quota
-error. Get a free key at https://context7.com/dashboard and export it:
+**Configured against the hosted server, not the npm package.** Context7 ships both an
+`@upstash/context7-mcp` stdio wrapper and a hosted endpoint at `https://mcp.context7.com/mcp`.
+The stdio wrapper answered `initialize` and `tools/list` but hung indefinitely on every real
+tool call here, with and without an API key; the hosted endpoint answers the identical calls in
+under three seconds. The hosted one also avoids spawning `npx` on every session start, so it is
+what `.mcp.json` points at.
+
+**A key is required in practice.** Anonymous requests are pooled per egress IP, and a shared
+container IP means the anonymous quota is frequently already spent — the API then answers
+`HTTP 200` with `{"error":"Quota Exceeded"}`, which clients tend to hang on rather than report.
+The quota is intermittent, not permanently exhausted: the same anonymous call failed one day and
+succeeded the next, so a key is the difference between reliable and coin-flip.
+
+Get a free key at https://context7.com/dashboard and put it in the environment:
 
 ```bash
 export CONTEXT7_API_KEY="ctx7sk-..."
 ```
 
-`.mcp.json` reads it from the environment, so the key is never committed.
+`.mcp.json` interpolates it into the Authorization header, so the key itself is never committed.
+In remote web sessions, set it as an environment variable on the environment (the container is
+rebuilt each session, so a shell export does not survive).
 
 ### sequential-thinking — structured reasoning scratchpad
 

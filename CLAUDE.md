@@ -38,9 +38,10 @@ generated artifacts — must be committed and pushed before the session ends.
 Configured in `.mcp.json`; what each one is, what was verified, and why two are documented
 but not enabled: `.claude/mcp-servers.md`.
 
-`context7` needs a free `CONTEXT7_API_KEY` in the environment — without it the anonymous
-quota is normally already spent and calls hang instead of erroring. `playwright` starts but
-cannot reach the network in remote sessions (browser egress is blocked); use `WebFetch` there.
+`context7` points at the hosted endpoint (the npm stdio wrapper hangs on every real call here)
+and needs a free `CONTEXT7_API_KEY` in the environment — without it requests fall back to a
+shared anonymous quota that is often already spent. `playwright` starts but cannot reach the
+network in remote sessions (browser egress is blocked); use `WebFetch` there.
 
 ## Task Observer
 
