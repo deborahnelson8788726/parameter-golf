@@ -54,3 +54,33 @@ resolved statuses always carry their resolution date
 **Suggested improvement:** For facts with a short half-life — service availability, pricing, rate limits, model catalogs — treat aggregated summaries as a candidate list to probe, never as the answer. Probe each candidate directly (an unauthenticated request distinguishes reachable-but-unauthenticated from gone), and confirm anything anomalous against the vendor's own changelog or status page before reporting. Separate probe-verified claims from summary-sourced ones in the output so the reader knows which numbers carry which confidence. Note also that a provider's own comparison of competitors is not a neutral source.
 
 **Principle:** Aggregated summaries decay silently: they are written once and keep asserting the same facts long after those facts expire, with no signal that anything changed. A cheap direct probe of the primary source is worth more than agreement among several secondhand sources, because those sources are correlated — they copy each other, so consensus among them is not independent confirmation.
+
+### Observation 4: A component that initializes cleanly can still be non-functional
+
+**Status:** OPEN
+**Date:** 2026-08-20
+**Session context:** Evaluating five MCP servers recommended in a social-media video before enabling them for the project.
+**Skill:** New skill candidate: vendoring-third-party-components
+**Type:** open-source
+**Phase/Area:** Verification depth
+
+**Issue:** Two of the five servers passed every structural check — the package resolved, the process started, the handshake succeeded, and the tool list came back populated — while being unable to do the thing they exist for. One returned its tool list and then stalled indefinitely on a real call, because the upstream service was answering HTTP 200 with a quota-exceeded body that the server neither surfaced nor failed on; the symptom presented as a hang, which reads as a local problem rather than an upstream refusal. The other exposed 24 working tools around a browser that could not open a single page. Both would have been reported as working if verification had stopped at the tool list, and the first would have been misdiagnosed as a broken install without querying the upstream API directly.
+
+**Suggested improvement:** Treat a successful handshake and tool listing as proof of installation, not of function. Verification must include one real call that exercises the component's actual purpose — fetch a document, load a page, return a result. When such a call hangs, query the upstream service directly before concluding the component is at fault: a 200 response carrying an error body is a common failure that hangs clients instead of erroring them. Record which layer each verification reached, so "installed" is never reported as "working".
+
+**Principle:** Initialization and function are independent properties. Startup checks answer whether a thing was assembled, never whether it works — and a component that fails only at the point of real use will pass every structural test right up until it is depended on.
+
+### Observation 5: Documented environment capabilities need probing before they are relied on
+
+**Status:** OPEN
+**Date:** 2026-08-20
+**Session context:** Deciding whether a browser-automation server could be enabled in a managed remote container.
+**Skill:** New skill candidate: vendoring-third-party-components
+**Type:** open-source
+**Phase/Area:** Environment assumptions
+
+**Issue:** The environment's own documentation stated that a browser was pre-installed and the automation framework pre-configured, with explicit guidance on how to point at the bundled binary. All of that was accurate — the binary existed and ran, reporting its version. What the documentation did not say, and could not be inferred from it, was that the browser had no network egress: every navigation failed with a connection reset, with and without the session proxy, and the proxy logged no connection attempt for the target host at all. The capability was present and simultaneously unusable, and only a real navigation revealed the gap.
+
+**Suggested improvement:** When an environment advertises a capability that a plan depends on, probe the specific operation the plan needs rather than the capability's presence. Presence checks (binary exists, version prints, config is set) and permission checks (can it actually reach what it needs) are separate questions, and platform documentation typically answers only the first. Where a probe shows the capability is present but restricted by policy, record it as a policy boundary and stop — it is not a misconfiguration to work around from inside the sandbox.
+
+**Principle:** Documentation describes what was installed; it rarely describes what is permitted. In managed environments the gap between the two is where plans silently fail, and only an end-to-end probe of the intended operation distinguishes them.

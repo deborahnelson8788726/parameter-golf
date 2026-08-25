@@ -33,6 +33,15 @@ fresh at start, and everything outside git is destroyed when the container is re
 **Only committed files survive.** Anything worth keeping — notes, observation logs,
 generated artifacts — must be committed and pushed before the session ends.
 
+## MCP servers
+
+Configured in `.mcp.json`; what each one is, what was verified, and why two are documented
+but not enabled: `.claude/mcp-servers.md`.
+
+`context7` needs a free `CONTEXT7_API_KEY` in the environment — without it the anonymous
+quota is normally already spent and calls hang instead of erroring. `playwright` starts but
+cannot reach the network in remote sessions (browser egress is blocked); use `WebFetch` there.
+
 ## Task Observer
 
 At the start of any task-oriented session — any interaction where you will
