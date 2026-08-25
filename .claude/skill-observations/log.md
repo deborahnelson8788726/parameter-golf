@@ -84,3 +84,18 @@ resolved statuses always carry their resolution date
 **Suggested improvement:** When an environment advertises a capability that a plan depends on, probe the specific operation the plan needs rather than the capability's presence. Presence checks (binary exists, version prints, config is set) and permission checks (can it actually reach what it needs) are separate questions, and platform documentation typically answers only the first. Where a probe shows the capability is present but restricted by policy, record it as a policy boundary and stop — it is not a misconfiguration to work around from inside the sandbox.
 
 **Principle:** Documentation describes what was installed; it rarely describes what is permitted. In managed environments the gap between the two is where plans silently fail, and only an end-to-end probe of the intended operation distinguishes them.
+
+### Observation 6: The recommended integration path was the broken one; an alternate path worked
+
+**Status:** OPEN
+**Date:** 2026-08-20
+**Session context:** Enabling a documentation service whose stdio wrapper hung on every real call, after obtaining an API key that was confirmed valid.
+**Skill:** New skill candidate: vendoring-third-party-components
+**Type:** open-source
+**Phase/Area:** Diagnosis when a component fails
+
+**Issue:** A service was nearly written off as unusable because its npm package — the integration path every guide and the vendor's own quickstart recommends — completed its handshake and then hung on every real call, before and after a valid key was supplied. Inspecting the package's compiled source for the hosts it contacts revealed it was a thin client for a hosted endpoint on a different subdomain. Called directly, that endpoint served the identical requests in under three seconds. The failure was in the wrapper, not the service, and no amount of further debugging on the key or the network would have found that, because both were fine.
+
+**Suggested improvement:** When a component fails at the point of real use and the obvious causes (credentials, connectivity, arguments) all check out, enumerate the service's other integration paths before concluding it is unusable — a hosted endpoint, a REST API, a different transport. Reading the failing client for the hosts and paths it actually contacts is a fast way to find them, and it also tells you what to probe directly to split "the client is broken" from "the service is broken". Prefer the path that works over the path that is recommended, and record why the deviation exists so it is not silently reverted later.
+
+**Principle:** A failing client is not a failing service. Popular integration paths accumulate recommendations faster than they accumulate correctness, so when the documented path fails at the point of use, treat it as one implementation among several rather than as the service itself.
