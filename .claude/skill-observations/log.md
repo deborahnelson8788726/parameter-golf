@@ -99,3 +99,18 @@ resolved statuses always carry their resolution date
 **Suggested improvement:** When a component fails at the point of real use and the obvious causes (credentials, connectivity, arguments) all check out, enumerate the service's other integration paths before concluding it is unusable — a hosted endpoint, a REST API, a different transport. Reading the failing client for the hosts and paths it actually contacts is a fast way to find them, and it also tells you what to probe directly to split "the client is broken" from "the service is broken". Prefer the path that works over the path that is recommended, and record why the deviation exists so it is not silently reverted later.
 
 **Principle:** A failing client is not a failing service. Popular integration paths accumulate recommendations faster than they accumulate correctness, so when the documented path fails at the point of use, treat it as one implementation among several rather than as the service itself.
+
+### Observation 7: A tool's fitness depends on the shape of the target, not the tool's quality
+
+**Status:** OPEN
+**Date:** 2026-08-26
+**Session context:** Evaluating a codebase knowledge-graph tool for a repository, after a run of similar "should we adopt this" requests.
+**Skill:** New skill candidate: vendoring-third-party-components
+**Type:** open-source
+**Phase/Area:** Adoption decisions
+
+**Issue:** The tool worked exactly as advertised and still was the wrong choice, for a reason no amount of reading about it would have surfaced: its value comes from cross-file relationships, and the target repository has almost none — 54 of 4718 edges crossed a file boundary, none of the 28 unique imports was repo-local, and 89% of nodes came from two dozen self-contained copies of one script. The output's community structure simply reproduced the directory listing. Notably the tool's own report declared the corpus "large enough that graph structure adds value", a verdict computed from word count rather than connectivity — so the artifact agreed with adoption while the measurements did not. Deciding from the description, or from the tool's own summary, would have produced the opposite conclusion in both cases.
+
+**Suggested improvement:** For adoption questions, identify the structural property the tool converts into value, then measure that property in the target before running anything — here, the ratio of cross-file to intra-file relationships and the count of internal imports. Run the tool on a copy to confirm, and read its raw output rather than its summary, since generated verdicts tend to key on volume (size, word count, node totals) rather than on the structure that actually determines usefulness. Record the measurements with the decision so a later revisit starts from evidence rather than re-litigating impressions.
+
+**Principle:** "Does this tool work?" and "will it help here?" are different questions, and only the first one is answered by the tool. Fitness is a property of the pairing, so an adoption decision needs a measurement of the target, not just a demonstration of the tool.
